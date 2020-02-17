@@ -26,7 +26,7 @@ class MatrixController extends Controller
             $matrixA = (is_array($request->matrixA[0])) ? $request->matrixA : [$request->matrixA];
             $matrixB = $request->matrixB;
             $commonSize = sizeof($matrixA[0]); //call sizeOf once better than keep calling it inside the loop
-            $bInnerSize = sizeof($matrixB[0]); //call sizeOf once better than keep calling it inside the loop
+            $bInnerSize = sizeof($matrixB[0]);
             $aSize = sizeof($matrixA);
             for ($i = 0; $i < $aSize; $i++) {
                 for ($j = 0; $j < $bInnerSize; $j++) {
@@ -38,19 +38,18 @@ class MatrixController extends Controller
                 }
             }
             return response()->json([
-                'message' => 'Success!',
+                'message' => 'success',
                 'detail' => $result
-            ], 200);
+            ]);
         } catch (ValidationException $e) {
             return response()->json([
-                'message' => 'Error!',
+                'message' => 'error',
                 'detail' => $e->errors()
-            ], 422);
+            ]);
         } catch (\Exception $e) {
-            // dd($e);
+            dd($e);
             return response()->json([
-                'status' => $e->getStatusCode(),
-                'message' => 'Error!',
+                'message' => 'error',
                 'detail' => $e->getMessage()
             ]);
         }
@@ -62,27 +61,11 @@ class MatrixController extends Controller
         $this->validate($request, [
             'matrixA' => 'required|array',
             'matrixB' => 'required|array',
-            'matrixB.*' => 'required|array|size:'.count($request->matrixB[0]),
+            'matrixB.*' => 'bail|required|array|size:'.count($request->matrixB[0]),
             'matrixB.*.*' => 'integer|min:0',
             'matrixA'.$isA2Dimenssional => 'required|array|size:'.count($request->matrixB),
             'matrixA.*'.$isA2Dimenssional => 'integer|min:0',
         ]);
-
-        // if (isset($request->matrixA[0]) && is_array($request->matrixA[0])) {
-        //     $this->validate($request, [
-        //         'matrixA.*' => 'required|array|size:'.count($request->matrixB),
-        //         'matrixB.*' => 'required|array|size:'.count($request->matrixB[0]),
-        //         'matrixA.*.*' => 'integer|min:0',
-        //         'matrixB.*.*' => 'integer|min:0',
-        //     ]);
-        // } else {
-        //     $this->validate($request, [
-        //         'matrixA' => 'required|array|size:'.count($request->matrixB),
-        //         'matrixB.*' => 'required|array|size:'.count($request->matrixB[0]),
-        //         'matrixA.*' => 'integer|min:0',
-        //         'matrixB.*.*' => 'integer|min:0',
-        //     ]);
-        // }
     }
 
     private function checkMatrixDepth(Request $request, string $str)

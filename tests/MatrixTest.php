@@ -6,6 +6,8 @@ use App\User;
 
 class MatrixTest extends TestCase
 {
+    use DatabaseTransactions;
+
     public function guard()
     {
         return Auth::guard('api');
@@ -15,9 +17,10 @@ class MatrixTest extends TestCase
      */
     public function testMultiply($request, $expectedResponse)
     {
+        $user = factory('App\User')->make();
         $headers = [];
         $token = Auth::guard('api')
-                ->login(User::whereEmail('abc@gmail.com')->first());
+                ->login($user);
         $headers['Authorization'] = 'Bearer ' . $token;
 
         $this->json('POST', '/api/multiply', $request, $headers)
@@ -30,15 +33,15 @@ class MatrixTest extends TestCase
             //valid tests with correct data in the request
             'valid payload test 1' => [
                 ["matrixA"=>[[2,12,4,5],[6,7,8,9]],"matrixB"=>[[10,11,12],[13,14,15],[16,17,18],[19,20,21]]],
-                ["message"=>"Success!","detail"=>[["LW","MT","NQ"],["QH","RL","SP"]]]
+                ["message"=>"success","detail"=>[["LW","MT","NQ"],["QH","RL","SP"]]]
             ],
             'valid payload test 2' => [
                 ["matrixA"=>[2,3],"matrixB"=>[[3],[2]]],
-                ["message"=>"Success!","detail"=>[["L"]]]
+                ["message"=>"success","detail"=>[["L"]]]
             ],
             'valid payload test 3' => [
                 ["matrixA"=>[[22,33]],"matrixB"=>[[13],[12]]],
-                ["message"=>"Success!","detail"=>[["ZF"]]]
+                ["message"=>"success","detail"=>[["ZF"]]]
             ],
             
             //tests with missing data in the request

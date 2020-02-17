@@ -54,6 +54,12 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+Run the migrations in order to create the users table
+
+```
+php artisan migrate
+```
+
 ## Running the app
 
 After successfully installing Postman, please import the following collection: 
