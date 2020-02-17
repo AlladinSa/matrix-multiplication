@@ -34,7 +34,7 @@ Postman (To test the endpoints)
 clone the app using this command
 
 ```
-https://github.com/AlladinSa/matrix-multiplication.git
+git clone https://github.com/AlladinSa/matrix-multiplication.git
 ```
 
 run composer install command
