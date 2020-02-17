@@ -54,6 +54,8 @@ DB_USERNAME=
 DB_PASSWORD=
 ```
 
+Generate the **JWT_SECRET** key in the .env file.
+
 Run the migrations in order to create the users table
 
 ```
