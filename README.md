@@ -1,6 +1,6 @@
 # Matrix Multiplication APP
 
-A Lumen app that helps authenticated users to multiply 2 matrices and return the result matrix content in Excel Coulumn format(eg: 1 -> A, 26 -> Z, 27 -> AA). The app has 3 endpoints:
+A Lumen app that helps authenticated users to multiply 2 matrices and return the result matrix content in Excel Column format(eg: 1 -> A, 26 -> Z, 27 -> AA). The app has 3 endpoints:
 ### Registration(/api/register): 
  to register a new user.
  takes name,  email and password in the request and returns a user object with a success message.
