@@ -19,13 +19,14 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 all the necessary requirements for a Lumen service to run on a machine including but not limited to:.
-PHP >= 7.2
-OpenSSL PHP Extension
-PDO PHP Extension
-Mbstring PHP Extension
-Mysql >= 5.7
-Composer (Dependency Manager for PHP)
-Postman (To test the endpoints)
+- PHP >= 7.2
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Mbstring PHP Extension
+- Mysql >= 5.7
+- Composer (Dependency Manager for PHP)
+
+Also, please download and install Postman to send sample api requests
 
 
 ### Installing
