@@ -58,13 +58,18 @@ class MatrixController extends Controller
     private function validateRequest(Request $request)
     {
         $isA2Dimenssional = ($this->checkMatrixDepth($request, 'A')) ? '.*' : '';
+
         $this->validate($request, [
             'matrixA' => 'required|array',
             'matrixB' => 'required|array',
-            'matrixB.*' => 'bail|required|array|size:'.count($request->matrixB[0]),
+            'matrixB.*' => 'required|array',
             'matrixB.*.*' => 'integer|min:0',
-            'matrixA'.$isA2Dimenssional => 'required|array|size:'.count($request->matrixB),
+            'matrixA'.$isA2Dimenssional => 'required|array',
             'matrixA.*'.$isA2Dimenssional => 'integer|min:0',
+        ]);
+        $this->validate($request, [
+            'matrixB.*' => 'array|size:'.count($request->matrixB[0]),
+            'matrixA'.$isA2Dimenssional => 'array|size:'.count($request->matrixB),
         ]);
     }
 
@@ -74,11 +79,11 @@ class MatrixController extends Controller
         return (isset($request->$matrixName[0]) && is_array($request->$matrixName[0]));
     }
 
-    private function convertIntegerToExcel(int $integer)
+    private function convertIntegerToExcel(int $inputNum)
     {
-        $numeric = ($integer - 1) % 26;
+        $numeric = ($inputNum - 1) % 26;
         $letter = chr(65 + $numeric);
-        $num2 = intval(($integer- 1) / 26);
+        $num2 = intval(($inputNum - 1) / 26);
         if ($num2 > 0) {
             return $this->convertIntegerToExcel($num2) . $letter;
         }

@@ -34,7 +34,7 @@ Postman (To test the endpoints)
 clone the app using this command
 
 ```
-git clone ?????????????
+https://github.com/AlladinSa/matrix-multiplication.git
 ```
 
 run composer install command
@@ -62,6 +62,12 @@ php artisan migrate
 
 ## Running the app
 
+Run the app using the following command:
+
+```
+php -S localhost:8000 -t public
+```
+
 After successfully installing Postman, please import the following collection: 
 
 ```
@@ -74,7 +80,7 @@ Once imported, you may find 3 request samples:
 -  Login an existing user.
 -  Sending a matrix multiplication request.
 
-each of the requests include sample data. You may play around with the requests as you wish.
+each of the requests include sample data. You may play around with the requests as you wish(please make sure the URL is the same as the you localhost url and port number).
 
 **Note**
 In order to send a matrix multiplication request, make sure to copy the JWT token returned in the response of the login request, and paste it in the header under Authorization; if not, you won't be authorized to make the request.
